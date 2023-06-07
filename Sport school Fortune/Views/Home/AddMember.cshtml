@@ -1,0 +1,47 @@
+﻿<link href="~/css/styleAddMember.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+
+<div id="formAddMember">
+    <h2>Добавить участника</h2>
+    <br />
+
+    <form method="post" action="~/Home/AddMember">
+        <p>
+            <label>Спортсмен</label><br />
+            <select name="sportsmanid">
+                <option disabled selected>Выберете спортсмена</option>
+                @{
+                    foreach(var sp in Model.allSportsman)
+                    {
+                        <option value="@sp.Id">@sp.f_name @sp.s_name @sp.m_name @sp.gender @sp.birthday @sp.phone</option>
+                    }
+                }
+            </select>
+        </p>
+        <p>
+            <label>Мероприятие</label><br />
+            <select name="activityid">
+                <option disabled selected>Выберете мероприятие</option>
+                @{
+                    foreach(var s in Model.allSport)
+                    {
+                        foreach(var ac in Model.allActivity)
+                        {
+                            if(s.Id == ac.sportId)
+                            {
+                                <option value="@ac.Id">@s.sport_name @ac.date @ac.name</option>
+                            }
+                        }
+                    }
+                }
+            </select>
+        </p>
+        <p>
+            <label>Занятое место</label><br />
+            <input type="number" name="member_place" />
+        </p>
+        <p>
+            <input type="submit" value="Добавить" />
+        </p>
+    </form>
+</div>

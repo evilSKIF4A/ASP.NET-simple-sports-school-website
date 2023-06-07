@@ -1,0 +1,81 @@
+﻿<link href="~/css/styleMember.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+<h2>Участники</h2>
+<br />
+<form style="margin-left: 200px" method="post" action="~/Home/Member">
+    <input type="text" name="filter" placeholder="Поиск по фамилии..." />
+    <input type="text" name="filter2" placeholder="Поиск по имени..." />
+    <input type="text" name="filter3" placeholder="Поиск по отчеству..." />
+    <select name="filter4">
+        <option disabled selected>Поиск по спорту...</option>
+        @{
+            foreach(var s in Model.allSport)
+            {
+                <option>@s.sport_name</option>
+            }
+        }
+    </select>
+    <input type="submit" value="Поиск" />
+</form>
+<form style="margin-left: 200px" method="post" action="~/Home/ExportMember">
+    <input type="submit" value="Скачать" />
+</form>
+<br />
+<table style="margin-left: 60px">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Пол</th>
+            <th>Дата рождения</th>
+            <th>Телефон</th>
+            <th>Спорт</th>
+            <th>Дата проведения</th>
+            <th>Наименование</th>
+            <th>Место</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var m in Model.allMember)
+            {
+                <tr>
+                    @{
+                        foreach(var sp in Model.allSportsman)
+                        {
+                            if(m.sportsmanId == sp.Id){
+                                <td>@sp.f_name</td>
+                                <td>@sp.s_name</td>
+                                <td>@sp.m_name</td>
+                                <td>@sp.gender</td>
+                                <td>@sp.birthday</td>
+                                <td>@sp.phone</td>
+                                break;
+                            }
+                        }
+
+                        foreach(var ac in Model.allActivity)
+                        {
+                            if(m.activityId == ac.Id)
+                            {
+                                foreach(var s in Model.allSport)
+                                {
+                                    if(ac.sportId == s.Id)
+                                    {
+                                        <td>@s.sport_name</td>
+                                        break;
+                                    }
+                                }
+                                <td>@ac.date</td>
+                                <td>@ac.name</td>
+                                break;
+                            }
+                        }
+                    }
+                    <td>@m.place</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

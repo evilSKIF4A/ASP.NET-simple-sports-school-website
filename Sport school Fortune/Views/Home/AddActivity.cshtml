@@ -1,0 +1,33 @@
+﻿<link href="~/css/styleAddActivity.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+
+<div id="formAddActivity">
+    <h2>Добавить мероприятие</h2>
+    <br />
+
+    <form method="post" action="~/Home/AddActivity">
+        <p>
+            <label>Вид спорта</label><br />
+            <select name="sportid">
+                <option disabled selected>Выберете спорт</option>
+                @{
+                    foreach(var s in Model.allSport)
+                    {
+                        <option value="@s.Id">@s.sport_name</option>
+                    }
+                }
+            </select>
+        </p>
+        <p>
+            <label>Дата проведения(формат YYYY.MM.DD)</label><br />
+            <input type="datetime" name="ActivityDate" />
+        </p>
+        <p>
+            <label>Название мероприятия</label><br />
+            <input type="text" name="ActivityName" />
+        </p>
+        <p>
+            <input type="submit" value="Добавить" />
+        </p>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+﻿<link href="~/css/styleSport.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+<h2>Виды спорта</h2>
+<br />
+<table margin-left: 350px>
+    <thead>
+        <tr>
+            <th>Название</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var s in Model.allSport)
+            {
+                <tr>
+                    <td>@s.sport_name</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

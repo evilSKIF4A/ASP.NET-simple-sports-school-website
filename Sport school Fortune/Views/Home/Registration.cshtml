@@ -1,0 +1,67 @@
+﻿<link href="~/css/styleRegistration.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+
+<div id="formRegistr">
+    <h2>Регистрация</h2>
+    <br />
+
+    <form method="post" action="~/Home/Registration">
+        <p>
+            <label>Фамилия</label><br />
+            <input type="text" name="SpFname" />
+        </p>
+        <p>
+            <label>Имя</label><br />
+            <input type="text" name="SpSname" />
+        </p>
+        <p>
+            <label>Отчество</label><br />
+            <input type="text" name="SpMname" />
+        </p>
+        <p>
+            <label>Пол</label><br />
+            <select name="SpGender">
+                <option disabled selected>Ваш пол...</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+            </select>
+        </p>
+        <p>
+            <label>Дата рождения(формат YYYY.MM.DD)</label><br />
+            <input type="datetime" name="SpBirthday" />
+        </p>
+        <p>
+            <label>Номер телефона</label><br />
+            <input type="number" name="SpPhone" />
+        </p>
+        <p>
+            <label>Рост</label><br />
+            <input type="number" name="SpHeight" />
+        </p>
+        <p>
+            <label>Вес</label><br />
+            <input type="number" name="SpWeight" />
+        </p>
+        <p>
+            <label>Вид спорта и тренер</label><br />
+            <select name="trainerid">
+                <option disabled selected>Выберете спорт и тренера</option>
+                @{
+                    foreach(var s in Model.allSport)
+                    {
+                        foreach(var tr in Model.allTrainer)
+                        {
+                            if (s.Id == tr.sportId)
+                            {
+                                <option value="@tr.Id">@s.sport_name @tr.f_name @tr.s_name @tr.m_name</option>
+                            }
+                        }
+                    }
+                }
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Зарегистрироваться" />
+        </p>
+    </form>
+</div>

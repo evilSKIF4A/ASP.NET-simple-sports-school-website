@@ -1,0 +1,48 @@
+﻿<link href="~/css/styleActivity.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+<h2>Мероприятия</h2>
+<br />
+<form style="margin-left: 200px" method="post" action="~/Home/Activity">
+    <select name="filter">
+        <option disabled selected>Поиск по спорту...</option>
+        @{
+            foreach(var s in Model.allSport)
+            {
+                <option>@s.sport_name</option>
+            }
+        }
+    </select>
+    <input type="submit" value="Поиск" />
+</form>
+<form style="margin-left: 200px" method="post" action="~/Home/ExportActivity">
+    <input type="submit" value="Скачать" />
+</form>
+<br />
+<table>
+    <thead>
+        <tr>
+            <td>Вид спорта</td>
+            <td>Дата проведения</td>
+            <td>Наименование</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var ac in Model.allActivity)
+            {
+                <tr>
+                    @{
+                        foreach(var s in Model.allSport){
+                            if(ac.sportId == s.Id){
+                                <td>@s.sport_name</td>
+                                break;
+                            }
+                        }
+                    }
+                    <td>@ac.date</td>
+                    <td>@ac.name</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

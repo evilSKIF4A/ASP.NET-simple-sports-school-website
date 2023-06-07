@@ -1,0 +1,95 @@
+﻿<link href="~/css/styleJournal.css" rel="stylesheet" type="text/css" />
+<link href="~/css/styleBackground.css" rel="stylesheet" type="text/css" />
+<h2>Журнал</h2>
+<br />
+<form style="margin-left: 200px" method="post" action="~/Home/Journal">
+    <input type="text" name="filter" placeholder="Поиск по фамилии..." />
+    <input type="text" name="filter2" placeholder="Поиск по имени..." />
+    <input type="text" name="filter3" placeholder="Поиск по отчеству..." />
+    <select name="filter4">
+        <option disabled selected>Поиск по спорту...</option>
+        @{
+            foreach(var s in Model.allSport)
+            {
+                <option>@s.sport_name</option>
+            }
+        }
+    </select>
+    <input type="submit" value="Поиск" />
+</form>
+<form style="margin-left: 200px" method="post" action="~/Home/ExportJournal">
+    <input type="submit" value="Скачать" />
+</form>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th colspan="9">Спортсмен</th>
+            <th colspan="6">Тренер</th>
+        </tr>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Пол</th>
+            <th>Дата рождения</th>
+            <th>Телефон</th>
+            <th>Рост</th>
+            <th>Вес</th>
+            <th>Спорт</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Пол</th>
+            <th>Дата рождения</th>
+            <th>Телефон</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var j in Model.allJournal)
+            {
+                <tr>
+                    @{
+                        foreach(var sp in Model.allSportsman)
+                        {
+                            if(j.sportsmanId == sp.Id)
+                            {
+                                <td>@sp.f_name</td>
+                                <td>@sp.s_name</td>
+                                <td>@sp.m_name</td>
+                                <td>@sp.gender</td>
+                                <td>@sp.birthday</td>
+                                <td>@sp.phone</td>
+                                <td>@sp.height</td>
+                                <td>@sp.weight</td>
+                                break;
+                            }
+                        }
+                        foreach(var s in Model.allSport)
+                        {
+                            if(j.sportId == s.Id)
+                            {
+                                <td>@s.sport_name</td>
+                                break;
+                            }
+                        }
+                        foreach(var tr in Model.allTrainer)
+                        {
+                            if(j.trainerId == tr.Id)
+                            {
+                                <td>@tr.f_name</td>
+                                <td>@tr.s_name</td>
+                                <td>@tr.m_name</td>
+                                <td>@tr.gender</td>
+                                <td>@tr.birthday</td>
+                                <td>@tr.phone</td>
+                                break;
+                            }
+                        }
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
